@@ -8,7 +8,7 @@ from matplotlib.backends.backend_tkagg import NavigationToolbar2Tk as Navigation
 from matplotlib.pyplot import text
 from matplotlib import style
 import numpy as np
-from PIL import ImageTk, Image
+import matplotlib.pyplot as plt
 
 #Crear ventana y etiquetas
 win=Tk()
@@ -67,6 +67,20 @@ def graficar():
     toolbar.update()
     canvas1.get_tk_widget().pack(side=TOP,fill=BOTH)
 
+    #Funcion para Limpiar
+    def limpiar():
+        canvas1.draw()
+        canvas1.get_tk_widget().pack_forget()
+        lim_inferior.delete(0, END)
+        lim_superior.delete(0, END)
+        tramos.delete(0, END)  
+        funcion.delete(0, END)
+
+    #Boton para limpiar
+    btn2=Button(win, text="  LIMPIAR  ",bg="cyan3", command=limpiar)
+    btn2.configure(font=("Consolas", 12))
+    btn2.pack()
+    btn2.place(x=400,y=110)
 
 #Etiqueta Función
 fun=Label(win,text="Función")
@@ -110,11 +124,6 @@ btn.configure(font=("Consolas", 12))
 btn.pack()
 btn.place(x=250,y=110)
 
-#Boton para Limpiar
-btn2=Button(win, text="  LIMPIAR  ",bg="cyan3", command=graficar)
-btn2.configure(font=("Consolas", 12))
-btn2.pack()
-btn2.place(x=400,y=110)
 
 #Espacio para la grafica
 canvas=Canvas(win,width=700,height=600,highlightbackground="cyan3")
